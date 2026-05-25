@@ -29,9 +29,9 @@
     <tags>Dipmade Extensions SqlParametre</tags>
   </metadata>
   <files>
-    <file src="..\bin\Release\DIPMADE.Extensions.dll" target="lib\net48\" />
-    <file src="..\bin\Release\DIPMADE.Extensions.pdb" target="lib\net48\" />
-    <file src="..\bin\Release\DIPMADE.Extensions.xml" target="lib\net48\" />
-    <file src="..\DIPMADE_Logo_fond.png" />
+    <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.dll" target="lib\net48\" />
+    <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.pdb" target="lib\net48\" />
+    <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.xml" target="lib\net48\" />
+    <file src="DipmadeExtension\DIPMADE_Logo_fond.png" />
   </files>
 </package>
