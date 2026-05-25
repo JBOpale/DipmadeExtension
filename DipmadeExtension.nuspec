@@ -27,6 +27,9 @@
     </description>
     <copyright>Copyright DIPMADE 2021</copyright>
     <tags>Dipmade Extensions SqlParametre</tags>
+    <dependencies>
+        <group targetFramework=".NETFramework4.8" />
+    </dependencies>
   </metadata>
   <files>
     <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.dll" target="lib\net48\" />
