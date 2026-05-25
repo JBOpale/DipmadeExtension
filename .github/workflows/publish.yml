@@ -8,6 +8,9 @@ on:
 jobs:
   publish:
     runs-on: windows-latest
+    permissions:
+      contents: write
+      packages: write
 
     steps:
       - name: Checkout
@@ -25,14 +28,13 @@ jobs:
 
       - name: Test
         run: dotnet test --configuration Release --no-restore
-
-      - name: Pack
+            
+      - name: Pack NuGet
+        shell: pwsh
         run: |
-          dotnet pack DipmadeExtension/DipmadeExtension.csproj \
-            --configuration Release \
-            --no-restore \
-            --output ./nupkgs \
-            /p:Version=${{ steps.version.outputs.VERSION }}
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          New-Item -ItemType Directory -Force -Path nupkg | Out-Null
+          nuget pack DipmadeExtension.nuspec -Version $version -OutputDirectory nupkg
 
       - name: Push to NuGet
         run: |

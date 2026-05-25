@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DipmadeExtension</id>
+
+    <version>1.0.2</version>
+    <authors>Jérôme FRANCOIS, Dipmade Teams</authors>
+    <owners>Jérôme FRANCOIS</owners>
+    <projectUrl>https://github.com/jbopalesas/DipmadeExtension</projectUrl>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>-->
+    <icon>DIPMADE_Logo_fond.png</icon>
+    <description>
+	  Ensemble de méthodes de simplification de votre code		
+  
+      Version 1.0.2 :
+      Corrections de bugs
+
+      Version 1.0.1 :
+      Méthode de génération d'un mot de passe
+	  
+      Version 1.0.0 :
+      GetMime : Méthodes permettant de récupérer le Mime par rapport à une extension
+      ConvertReal : Convertit une chaine en double en gérant le . et , et le %
+      ToDataTable : Permethode permettant de passer de convertir List Int64 en [dbo].[Int64List] pour un SqlParametre
+      Voir le site pour la déclaration de la table [dbo].[Int64List]
+    </description>
+    <copyright>Copyright DIPMADE 2021</copyright>
+    <tags>Dipmade Extensions SqlParametre</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\bin\Release\DIPMADE.Extensions.dll" target="lib\net461" />
+    <file src="..\bin\Release\DIPMADE.Extensions.pdb" target="lib\net461" />
+    <file src="..\bin\Release\DIPMADE.Extensions.xml" target="lib\net461" />
+    <file src="..\DIPMADE_Logo_fond.png" />
+  </files>
+</package>
