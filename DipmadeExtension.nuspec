@@ -27,15 +27,11 @@
     </description>
     <copyright>Copyright DIPMADE 2021</copyright>
     <tags>Dipmade Extensions SqlParametre</tags>
-    <dependencies>
-      <group targetFramework=".NETFramework4.6.1">
-      </group>
-    </dependencies>
   </metadata>
   <files>
-    <file src="..\bin\Release\DIPMADE.Extensions.dll" target="lib\net461" />
-    <file src="..\bin\Release\DIPMADE.Extensions.pdb" target="lib\net461" />
-    <file src="..\bin\Release\DIPMADE.Extensions.xml" target="lib\net461" />
+    <file src="..\bin\Release\DIPMADE.Extensions.dll" target="lib\net48\" />
+    <file src="..\bin\Release\DIPMADE.Extensions.pdb" target="lib\net48\" />
+    <file src="..\bin\Release\DIPMADE.Extensions.xml" target="lib\net48\" />
     <file src="..\DIPMADE_Logo_fond.png" />
   </files>
 </package>
