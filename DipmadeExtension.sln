@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DipmadeExtension", "DipmadeExtension\DipmadeExtension.csproj", "{363C89D0-78F8-45DB-A5E6-334AFC740028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_Extensions", "UnitTest_Extensions\UnitTest_Extensions.csproj", "{9CC8EC4D-167D-4A71-9759-640388571AB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{363C89D0-78F8-45DB-A5E6-334AFC740028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363C89D0-78F8-45DB-A5E6-334AFC740028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363C89D0-78F8-45DB-A5E6-334AFC740028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363C89D0-78F8-45DB-A5E6-334AFC740028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC8EC4D-167D-4A71-9759-640388571AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC8EC4D-167D-4A71-9759-640388571AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC8EC4D-167D-4A71-9759-640388571AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC8EC4D-167D-4A71-9759-640388571AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2352C692-2F79-4B7C-9146-AE44C89902C4}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/opqual
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DipmadeExtension\\DipmadeExtension.csproj
+		SccProjectName1 = DipmadeExtension
+		SccLocalPath1 = DipmadeExtension
+		SccProjectUniqueName2 = UnitTest_Extensions\\UnitTest_Extensions.csproj
+		SccProjectName2 = UnitTest_Extensions
+		SccLocalPath2 = UnitTest_Extensions
+	EndGlobalSection
+EndGlobal
