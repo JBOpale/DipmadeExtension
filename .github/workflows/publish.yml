@@ -21,13 +21,13 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore DipmadeExtension/DipmadeExtension.csproj
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build DipmadeExtension/DipmadeExtension.csproj --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --configuration Release --no-restore
+        run: dotnet test DipmadeExtension/DipmadeExtension.csproj --configuration Release --no-restore
             
       - name: Pack NuGet
         shell: pwsh
