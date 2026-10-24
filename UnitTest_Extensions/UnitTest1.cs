@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using DIPMADE;
+using JBOpale;
 using System.Data.SqlClient;
 
 namespace UnitTest_Extensions
@@ -14,17 +14,17 @@ namespace UnitTest_Extensions
         [TestMethod]
         public void TestMethod_Password()
         {
-            Debug.WriteLine(DIPMADE.Extensions.GeneratePassword(10));
+            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10));
             Thread.Sleep(100);
-            Debug.WriteLine(DIPMADE.Extensions.GeneratePassword(8));
+            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(8));
             Thread.Sleep(100);
-            Debug.WriteLine(DIPMADE.Extensions.GeneratePassword(8));
+            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(8));
             Thread.Sleep(100);
-            Debug.WriteLine(DIPMADE.Extensions.GeneratePassword(10));
+            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10));
             Thread.Sleep(100);
-            Debug.WriteLine(DIPMADE.Extensions.GeneratePassword(10, false, false));
+            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10, false, false));
             Thread.Sleep(100);
-            Debug.WriteLine(DIPMADE.Extensions.GeneratePassword(10));
+            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10));
             /*
             0k9#jFguf9
             |7HrH*i2

@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DipmadeExtension</id>
+    <id>JBOpale.Extensions</id>
 
-    <version>1.0.2</version>
+    <version>2.0.0</version>
     <authors>JB-Opale</authors>
     <owners>JB-Opale</owners>
-    <projectUrl>https://github.com/jbopalesas/DipmadeExtension</projectUrl>
+    <projectUrl>https://github.com/JBOpale/DipmadeExtension</projectUrl>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <icon>DIPMADE_Logo_fond.png</icon>
     <description>
 	  Ensemble de méthodes de simplification de votre code		
   
+      Version 2.0.0 :
+      Renommage : package JBOpale.Extensions, assembly JBOpale.Extensions, espace de noms JBOpale (anciennement DIPMADE).
+      Licence MIT.
+
       Version 1.0.2 :
       Corrections de bugs
 
@@ -26,16 +29,15 @@
       Voir le site pour la déclaration de la table [dbo].[Int64List]
     </description>
     <copyright>Copyright JB-Opale 2021-2026</copyright>
-    <tags>Dipmade Extensions SqlParametre</tags>
+    <tags>JBOpale Extensions SqlParametre</tags>
     <dependencies>
         <group targetFramework=".NETFramework4.8" />
     </dependencies>
   </metadata>
   <files>
-    <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.dll" target="lib\net48\" />
-    <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.pdb" target="lib\net48\" />
-    <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.xml" target="lib\net48\" />
-    <file src="DipmadeExtension\DIPMADE_Logo_fond.png" />
+    <file src="JBOpale.Extensions\bin\Release\JBOpale.Extensions.dll" target="lib\net48\" />
+    <file src="JBOpale.Extensions\bin\Release\JBOpale.Extensions.pdb" target="lib\net48\" />
+    <file src="JBOpale.Extensions\bin\Release\JBOpale.Extensions.xml" target="lib\net48\" />
     <file src="LICENSE.md" />
   </files>
 </package>
