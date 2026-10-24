@@ -7,8 +7,8 @@
     <authors>Jérôme FRANCOIS, Dipmade Teams</authors>
     <owners>Jérôme FRANCOIS</owners>
     <projectUrl>https://github.com/jbopalesas/DipmadeExtension</projectUrl>
-    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>-->
+    <license type="expression">LGPL-3.0-or-later</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <icon>DIPMADE_Logo_fond.png</icon>
     <description>
 	  Ensemble de méthodes de simplification de votre code		
@@ -36,5 +36,8 @@
     <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.pdb" target="lib\net48\" />
     <file src="DipmadeExtension\bin\Release\DIPMADE.Extensions.xml" target="lib\net48\" />
     <file src="DipmadeExtension\DIPMADE_Logo_fond.png" />
+    <file src="LICENSE.md" />
+    <file src="COPYING.LESSER" />
+    <file src="COPYING" />
   </files>
 </package>
