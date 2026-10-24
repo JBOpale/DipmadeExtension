@@ -4,8 +4,8 @@
     <id>DipmadeExtension</id>
 
     <version>1.0.2</version>
-    <authors>Jérôme FRANCOIS, Dipmade Teams</authors>
-    <owners>Jérôme FRANCOIS</owners>
+    <authors>JB-Opale</authors>
+    <owners>JB-Opale</owners>
     <projectUrl>https://github.com/jbopalesas/DipmadeExtension</projectUrl>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -25,7 +25,7 @@
       ToDataTable : Permethode permettant de passer de convertir List Int64 en [dbo].[Int64List] pour un SqlParametre
       Voir le site pour la déclaration de la table [dbo].[Int64List]
     </description>
-    <copyright>Copyright DIPMADE 2021</copyright>
+    <copyright>Copyright JB-Opale 2021-2026</copyright>
     <tags>Dipmade Extensions SqlParametre</tags>
     <dependencies>
         <group targetFramework=".NETFramework4.8" />
