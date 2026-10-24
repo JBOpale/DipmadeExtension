@@ -21,20 +21,20 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
       - name: Restore
-        run: dotnet restore DipmadeExtension/DipmadeExtension.csproj
+        run: dotnet restore JBOpale.Extensions/JBOpale.Extensions.csproj
 
       - name: Build
-        run: dotnet build DipmadeExtension/DipmadeExtension.csproj --configuration Release --no-restore
+        run: dotnet build JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test DipmadeExtension/DipmadeExtension.csproj --configuration Release --no-restore
+        run: dotnet test JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release --no-restore
             
       - name: Pack NuGet
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}".TrimStart('v')
           New-Item -ItemType Directory -Force -Path nupkg | Out-Null
-          nuget pack DipmadeExtension.nuspec -Version $version -OutputDirectory nupkg
+          nuget pack JBOpale.Extensions.nuspec -Version $version -OutputDirectory nupkg
 
       - name: Push to NuGet
         shell: pwsh

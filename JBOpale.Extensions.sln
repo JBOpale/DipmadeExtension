@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DipmadeExtension", "DipmadeExtension\DipmadeExtension.csproj", "{363C89D0-78F8-45DB-A5E6-334AFC740028}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBOpale.Extensions", "JBOpale.Extensions\JBOpale.Extensions.csproj", "{363C89D0-78F8-45DB-A5E6-334AFC740028}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_Extensions", "UnitTest_Extensions\UnitTest_Extensions.csproj", "{9CC8EC4D-167D-4A71-9759-640388571AB9}"
 EndProject
@@ -33,9 +33,9 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://dev.azure.com/opqual
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = DipmadeExtension\\DipmadeExtension.csproj
-		SccProjectName1 = DipmadeExtension
-		SccLocalPath1 = DipmadeExtension
+		SccProjectUniqueName1 = JBOpale.Extensions\\JBOpale.Extensions.csproj
+		SccProjectName1 = JBOpale.Extensions
+		SccLocalPath1 = JBOpale.Extensions
 		SccProjectUniqueName2 = UnitTest_Extensions\\UnitTest_Extensions.csproj
 		SccProjectName2 = UnitTest_Extensions
 		SccLocalPath2 = UnitTest_Extensions

@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DipmadeExtension\DipmadeExtension.csproj">
+    <ProjectReference Include="..\JBOpale.Extensions\JBOpale.Extensions.csproj">
       <Project>{363c89d0-78f8-45db-a5e6-334afc740028}</Project>
-      <Name>DipmadeExtension</Name>
+      <Name>JBOpale.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

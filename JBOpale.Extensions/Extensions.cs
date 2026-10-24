@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace DIPMADE
+namespace JBOpale
 {
     /// <summary>
     /// Ensemble des méthodes de simplification du code
