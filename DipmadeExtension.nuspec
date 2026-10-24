@@ -7,7 +7,7 @@
     <authors>Jérôme FRANCOIS, Dipmade Teams</authors>
     <owners>Jérôme FRANCOIS</owners>
     <projectUrl>https://github.com/jbopalesas/DipmadeExtension</projectUrl>
-    <license type="expression">LGPL-3.0-or-later</license>
+    <license type="expression">LGPL-3.0-or-later WITH LGPL-3.0-linking-exception</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <icon>DIPMADE_Logo_fond.png</icon>
     <description>
@@ -39,5 +39,6 @@
     <file src="LICENSE.md" />
     <file src="COPYING.LESSER" />
     <file src="COPYING" />
+    <file src="LGPL-3.0-linking-exception.txt" />
   </files>
 </package>
