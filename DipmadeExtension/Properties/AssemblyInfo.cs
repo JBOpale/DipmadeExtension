@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Extensions")]
 [assembly: AssemblyDescription("Ensemble de méthodes pour simplifier votre code")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("DIPMADE")]
+[assembly: AssemblyCompany("JB-Opale")]
 [assembly: AssemblyProduct("Extensions")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCopyright("Copyright © 2021-2026 JB-Opale")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
