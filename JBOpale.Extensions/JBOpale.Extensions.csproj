@@ -25,6 +25,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
 Version 2.0.0 :
+Skill Claude (skills/jbopale-extensions/SKILL.md) inclus dans le package pour expliquer l'utilisation de la bibliothèque.
 Renommage : package JBOpale.Extensions, assembly JBOpale.Extensions, espace de noms JBOpale (anciennement DIPMADE).
 Cibles net48 et net10.0 (Microsoft.Data.SqlClient sous net10.0, System.Data.SqlClient sous net48).
 Licence MIT.
@@ -44,6 +45,7 @@ Version 1.0.0 : GetMime, ConvertReal, ToDataTable (List Int64 vers [dbo].[Int64L
   <ItemGroup>
     <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
     <None Include="..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\skills\jbopale-extensions\SKILL.md" Pack="true" PackagePath="skills\jbopale-extensions\" />
   </ItemGroup>
 
 </Project>
