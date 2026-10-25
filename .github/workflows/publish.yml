@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish:
-    runs-on: windows-latest
+    runs-on: [self-hosted, Windows, SURFACE-BOOK-3]
     permissions:
       contents: write
       packages: write
@@ -16,28 +16,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extraire la version depuis le tag
-        id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      - name: Installer le SDK .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
 
       - name: Restore
-        run: dotnet restore JBOpale.Extensions/JBOpale.Extensions.csproj
+        run: dotnet restore JBOpale.Extensions.sln
 
       - name: Build
-        run: dotnet build JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release --no-restore
+        run: dotnet build JBOpale.Extensions.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release --no-restore
-            
+        run: dotnet test UnitTest_Extensions/UnitTest_Extensions.csproj --configuration Release --no-build
+
       - name: Pack NuGet
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}".TrimStart('v')
-          New-Item -ItemType Directory -Force -Path nupkg | Out-Null
-          nuget pack JBOpale.Extensions.nuspec -Version $version -OutputDirectory nupkg
+          dotnet pack JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release --no-build -p:Version=$version --output nupkg
 
       - name: Push to NuGet
         shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           $pkg = Get-ChildItem -Path nupkg -Filter *.nupkg | Select-Object -First 1
-          dotnet nuget push $pkg.FullName --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push $pkg.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate

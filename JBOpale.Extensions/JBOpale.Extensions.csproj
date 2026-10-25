@@ -1,71 +1,49 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{363C89D0-78F8-45DB-A5E6-334AFC740028}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JBOpale.Extensions</RootNamespace>
+    <TargetFrameworks>net48;net10.0</TargetFrameworks>
+    <RootNamespace>JBOpale</RootNamespace>
     <AssemblyName>JBOpale.Extensions</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <TargetFrameworkProfile />
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\JBOpale.Extensions.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\JBOpale.Extensions.xml</DocumentationFile>
-  </PropertyGroup>
+
   <PropertyGroup>
+    <PackageId>JBOpale.Extensions</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>JB-Opale</Authors>
+    <Company>JB-Opale</Company>
+    <Product>JBOpale.Extensions</Product>
+    <Copyright>Copyright JB-Opale 2021-2026</Copyright>
+    <Description>Ensemble de méthodes d'extension C# pour simplifier votre code : chaînes, collections, dates, nombres, MIME, mots de passe, paramètres SQL (listes).</Description>
+    <PackageTags>JBOpale Extensions SqlParametre</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/JBOpale/DipmadeExtension</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JBOpale/DipmadeExtension</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>
+Version 2.0.0 :
+Renommage : package JBOpale.Extensions, assembly JBOpale.Extensions, espace de noms JBOpale (anciennement DIPMADE).
+Cibles net48 et net10.0 (Microsoft.Data.SqlClient sous net10.0, System.Data.SqlClient sous net48).
+Licence MIT.
+Nouvelles extensions : chaînes (RemoveAccents, ToSlug, Truncate, ToSha256...), collections (Batch, DistinctBy, ForEach, In...), dates (StartOfWeek, EndOfMonth, Age, ToRelativeTime...), nombres (Clamp, IsBetween, ToFileSize), énumérations et exceptions.
+
+Version 1.0.2 : Corrections de bugs
+Version 1.0.1 : Méthode de génération d'un mot de passe
+Version 1.0.0 : GetMime, ConvertReal, ToDataTable (List Int64 vers [dbo].[Int64List] pour un SqlParameter)
+    </PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.1" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="NumericExtensions.cs" />
-    <Compile Include="ObjectExtensions.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
