@@ -1,39 +1,26 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
-using System.Threading;
 using JBOpale;
+#if NETFRAMEWORK
 using System.Data.SqlClient;
+#else
+using Microsoft.Data.SqlClient;
+#endif
 
 namespace UnitTest_Extensions
 {
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void TestMethod_Password()
-        {
-            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10));
-            Thread.Sleep(100);
-            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(8));
-            Thread.Sleep(100);
-            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(8));
-            Thread.Sleep(100);
-            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10));
-            Thread.Sleep(100);
-            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10, false, false));
-            Thread.Sleep(100);
-            Debug.WriteLine(JBOpale.Extensions.GeneratePassword(10));
-            /*
-            0k9#jFguf9
-            |7HrH*i2
-            8?O364K-
-            882D2=lQTm
-            H4U9kya2up
-            kv}D9=k+£-
-             */
-        }
+        /// <summary>
+        /// Variable d'environnement contenant la chaîne de connexion de la base de test
+        /// (tests d'intégration, ignorés si elle est absente).
+        /// </summary>
+        private const string ConnectionVariable = "JBOPALE_TEST_SQL";
+
         class T_LOGS
         {
             public int Id;
@@ -41,169 +28,102 @@ namespace UnitTest_Extensions
         }
 
         [TestMethod]
-        public void TestMethod_ToDatableStruct()
+        public void TestMethod_Password()
         {
-            List<Int64> lst = new List<long>();
-            lst.Add(0);
-            lst.Add(1);
-            lst.Add(2);
+            string p = JBOpale.Extensions.GeneratePassword(10);
+            Debug.WriteLine(p);
+            Assert.AreEqual(10, p.Length);
+            Assert.AreEqual(8, JBOpale.Extensions.GeneratePassword().Length);
+        }
+
+        [TestMethod]
+        public void TestMethod_ToDatableStruct_Parametre()
+        {
+            List<Int64> lst = new List<long> { 0, 1, 2 };
             SqlParameter p = lst.ToDataTableS("[dbo].[Int64List]", "Id", "@Int64List");
 
-            SqlConnection myConnectionOPQUAL = new SqlConnection(
-               "Data Source=tcp:192.168.0.25,1433;Initial Catalog=GIC;"
-               + "User ID=sa;Password=wSS2021!;");
-
-            if (myConnectionOPQUAL.State != System.Data.ConnectionState.Open) myConnectionOPQUAL.Open();
-
-            SqlCommand myCommand = null;
-            try
-            {
-                if (myConnectionOPQUAL.State != System.Data.ConnectionState.Open) myConnectionOPQUAL.Open();
-
-                //Execution de la requête
-                myCommand = new SqlCommand("TestInt64List", myConnectionOPQUAL);
-                myCommand.Parameters.Add(p);
-                myCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataReader reader = myCommand.ExecuteReader();
-                while (reader.Read())
-                {
-                    Debug.WriteLine("Id : " + reader["Id"]);
-                }
-                reader.Close();
-
-            }
-            catch (Exception exp)
-            {
-                Debug.WriteLine(exp.Message);
-            }
-            finally
-            {
-                if (myCommand != null) myCommand.Dispose();
-            }
+            Assert.AreEqual("@Int64List", p.ParameterName);
+            Assert.AreEqual(SqlDbType.Structured, p.SqlDbType);
+            Assert.AreEqual("[dbo].[Int64List]", p.TypeName);
+            DataTable table = (DataTable)p.Value;
+            Assert.AreEqual(3, table.Rows.Count);
+            Assert.AreEqual("Id", table.Columns[0].ColumnName);
         }
+
         [TestMethod]
-        public void TestMethod_ToDatableStructDateTime()
+        public void TestMethod_ToDatableString_Parametre()
         {
-            List<DateTime> lst = new List<DateTime>();
-            lst.Add(DateTime.Now.AddDays(1));
-            lst.Add(DateTime.Now.AddDays(2));
-            lst.Add(DateTime.Now.AddDays(3));
-            SqlParameter p = lst.ToDataTableS("[dbo].[DateTimeList]","date", "@DateTimeList");
-
-            SqlConnection myConnectionOPQUAL = new SqlConnection(
-               "Data Source=tcp:192.168.0.25,1433;Initial Catalog=GIC;"
-               + "User ID=sa;Password=wSS2021!;");
-
-            if (myConnectionOPQUAL.State != System.Data.ConnectionState.Open) myConnectionOPQUAL.Open();
-
-            SqlCommand myCommand = null;
-            try
-            {
-                if (myConnectionOPQUAL.State != System.Data.ConnectionState.Open) myConnectionOPQUAL.Open();
-
-                //Execution de la requête
-                myCommand = new SqlCommand("TestTypeDateTime", myConnectionOPQUAL);
-                myCommand.Parameters.Add(p);
-                myCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataReader reader = myCommand.ExecuteReader();
-                while (reader.Read())
-                {
-                    Debug.WriteLine("date : " + reader["date"]);
-                }
-                reader.Close();
-
-            }
-            catch (Exception exp)
-            {
-                Debug.WriteLine(exp.Message);
-            }
-            finally
-            {
-                if (myCommand != null) myCommand.Dispose();
-            }
-        }
-        [TestMethod]
-        public void TestMethod_ToDatableSting()
-        {
-            List<string> lst = new List<string>();
-            lst.Add(DateTime.Now + "123");
-            lst.Add(DateTime.Now + "456");
-            lst.Add(DateTime.Now + "789");
+            List<string> lst = new List<string> { "a", "b" };
             SqlParameter p = lst.ToDataTableC("[dbo].[StringList]", "@StringList");
 
-            SqlConnection myConnectionOPQUAL = new SqlConnection(
-               "Data Source=tcp:192.168.0.25,1433;Initial Catalog=GIC;"
-               + "User ID=sa;Password=wSS2021!;");
-
-            if (myConnectionOPQUAL.State != System.Data.ConnectionState.Open) myConnectionOPQUAL.Open();
-
-            SqlCommand myCommand = null;
-            try
-            {
-                if (myConnectionOPQUAL.State != System.Data.ConnectionState.Open) myConnectionOPQUAL.Open();
-
-                //Execution de la requête
-                myCommand = new SqlCommand("TestTypeString", myConnectionOPQUAL);
-                myCommand.Parameters.Add(p);
-                myCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataReader reader = myCommand.ExecuteReader();
-                while (reader.Read())
-                {
-                    Debug.WriteLine("s : " + reader["s"]);
-                }
-                reader.Close();
-
-            }
-            catch (Exception exp)
-            {
-                Debug.WriteLine(exp.Message);
-            }
-            finally
-            {
-                if (myCommand != null) myCommand.Dispose();
-            }
+            Assert.AreEqual(SqlDbType.Structured, p.SqlDbType);
+            Assert.AreEqual(2, ((DataTable)p.Value).Rows.Count);
         }
 
         [TestMethod]
-        public void TestMethod_ToDatableClass()
+        public void TestMethod_ToDatableClass_Parametre()
         {
-
-            SqlConnection myConnection = new SqlConnection(
-               "Data Source=tcp:192.168.0.25,1433;Initial Catalog=GIC;"
-               + "User ID=sa;Password=wSS2021!;");
-
-            if (myConnection.State != System.Data.ConnectionState.Open) myConnection.Open();
-
-            SqlCommand myCommand = null;
-            try
+            List<T_LOGS> lst = new List<T_LOGS>
             {
-                if (myConnection.State != System.Data.ConnectionState.Open) myConnection.Open();
+                new T_LOGS { Id = 0, Nom = "s0" },
+                new T_LOGS { Id = 1, Nom = "s1" }
+            };
+            SqlParameter p = lst.ToDataTableC("[dbo].[TypeList]", "@TypeList");
 
-                List<T_LOGS> lst = new List<T_LOGS>();
-                lst.Add(new T_LOGS() { Id = 0, Nom = "s0" });
-                lst.Add(new T_LOGS() { Id = 1, Nom = "s1" });
-                lst.Add(new T_LOGS() { Id = 2, Nom = "s2" });
-                SqlParameter p = lst.ToDataTableC("[dbo].[TypeList]", "@TypeList");
-                //Execution de la requête
-                myCommand = new SqlCommand("TestType", myConnection);
-                myCommand.Parameters.Add(p);
-                myCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataReader reader =  myCommand.ExecuteReader();
-                while(reader.Read())
+            DataTable table = (DataTable)p.Value;
+            Assert.AreEqual(2, table.Rows.Count);
+            Assert.AreEqual("Id", table.Columns[0].ColumnName);
+            Assert.AreEqual("Nom", table.Columns[1].ColumnName);
+            Assert.AreEqual("s1", table.Rows[1]["Nom"]);
+        }
+
+        [TestMethod]
+        public void TestMethod_ToDatableStruct_SqlServer()
+        {
+            Executer("TestInt64List", new List<Int64> { 0, 1, 2 }.ToDataTableS("[dbo].[Int64List]", "Id", "@Int64List"), "Id");
+        }
+
+        [TestMethod]
+        public void TestMethod_ToDatableStructDateTime_SqlServer()
+        {
+            List<DateTime> lst = new List<DateTime> { DateTime.Now.AddDays(1), DateTime.Now.AddDays(2) };
+            Executer("TestTypeDateTime", lst.ToDataTableS("[dbo].[DateTimeList]", "date", "@DateTimeList"), "date");
+        }
+
+        [TestMethod]
+        public void TestMethod_ToDatableString_SqlServer()
+        {
+            List<string> lst = new List<string> { "123", "456" };
+            Executer("TestTypeString", lst.ToDataTableC("[dbo].[StringList]", "@StringList"), "s");
+        }
+
+        [TestMethod]
+        public void TestMethod_ToDatableClass_SqlServer()
+        {
+            List<T_LOGS> lst = new List<T_LOGS> { new T_LOGS { Id = 0, Nom = "s0" }, new T_LOGS { Id = 1, Nom = "s1" } };
+            Executer("TestType", lst.ToDataTableC("[dbo].[TypeList]", "@TypeList"), "Id");
+        }
+
+        /// <summary>
+        /// Exécute une procédure stockée de test sur la base désignée par la variable d'environnement.
+        /// </summary>
+        private static void Executer(string procedure, SqlParameter parametre, string colonne)
+        {
+            string connexion = Environment.GetEnvironmentVariable(ConnectionVariable);
+            if (string.IsNullOrWhiteSpace(connexion))
+                Assert.Inconclusive("Variable d'environnement " + ConnectionVariable + " absente : test d'intégration SQL Server ignoré.");
+
+            using (SqlConnection cn = new SqlConnection(connexion))
+            using (SqlCommand cmd = new SqlCommand(procedure, cn))
+            {
+                cn.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(parametre);
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    Debug.WriteLine("Id : " + reader["Id"]);
-                    Debug.WriteLine("Nom : " + reader["Nom"]);
+                    while (reader.Read())
+                        Debug.WriteLine(colonne + " : " + reader[colonne]);
                 }
-                reader.Close();
-
-            }
-            catch (Exception exp)
-            {
-                Debug.WriteLine(exp.Message);
-            }
-            finally
-            {
-                if (myCommand != null) myCommand.Dispose();
             }
         }
     }

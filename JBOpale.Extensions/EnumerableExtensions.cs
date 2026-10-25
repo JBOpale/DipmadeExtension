@@ -62,6 +62,7 @@ namespace JBOpale
             if (batch.Count > 0) yield return batch;
         }
 
+#if !NET6_0_OR_GREATER
         /// <summary>
         /// Retourne les éléments distincts selon une clé.
         /// </summary>
@@ -75,13 +76,7 @@ namespace JBOpale
             }
         }
 
-        /// <summary>
-        /// Crée un HashSet à partir de la séquence.
-        /// </summary>
-        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer = null)
-        {
-            return new HashSet<T>(source.OrEmpty(), comparer);
-        }
+#endif
 
         /// <summary>
         /// Concatène les éléments avec un séparateur.
@@ -108,6 +103,7 @@ namespace JBOpale
             return values != null && values.Contains(value);
         }
 
+#if NETFRAMEWORK
         /// <summary>
         /// Retourne la valeur associée à la clé, ou la valeur par défaut si la clé est absente.
         /// </summary>
@@ -117,6 +113,7 @@ namespace JBOpale
             TValue value;
             return dictionary.TryGetValue(key, out value) ? value : defaultValue;
         }
+#endif
 
         /// <summary>
         /// Ajoute la valeur, ou remplace celle de la clé si elle existe déjà.
