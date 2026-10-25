@@ -6,7 +6,24 @@ on:
       - 'v*'
 
 jobs:
+  # La publication est bloquée tant que tous les tests ne passent pas, sur net48 et net10.0.
+  test:
+    runs-on: [self-hosted, Windows, SURFACE-BOOK-3]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installer le SDK .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Tests (net48 et net10.0)
+        run: dotnet test JBOpale.Extensions.sln --configuration Release
+
   publish:
+    needs: test
     runs-on: [self-hosted, Windows, SURFACE-BOOK-3]
     permissions:
       contents: write
@@ -21,20 +38,23 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Restore
-        run: dotnet restore JBOpale.Extensions.sln
-
-      - name: Build
-        run: dotnet build JBOpale.Extensions.sln --configuration Release --no-restore
-
-      - name: Test
-        run: dotnet test UnitTest_Extensions/UnitTest_Extensions.csproj --configuration Release --no-build
-
       - name: Pack NuGet
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}".TrimStart('v')
-          dotnet pack JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release --no-build -p:Version=$version --output nupkg
+          dotnet pack JBOpale.Extensions/JBOpale.Extensions.csproj --configuration Release -p:Version=$version --output nupkg
+
+      - name: Vérifier le contenu du package
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $pkg = Get-ChildItem -Path nupkg -Filter *.nupkg | Select-Object -First 1
+          $zip = [System.IO.Compression.ZipFile]::OpenRead($pkg.FullName)
+          $names = $zip.Entries | ForEach-Object { $_.FullName }
+          $zip.Dispose()
+          foreach ($attendu in 'lib/net48/JBOpale.Extensions.dll', 'lib/net10.0/JBOpale.Extensions.dll', 'skills/jbopale-extensions/SKILL.md', 'README.md', 'LICENSE.md') {
+            if ($names -notcontains $attendu) { throw "Fichier manquant dans le package : $attendu" }
+          }
 
       - name: Push to NuGet
         shell: pwsh

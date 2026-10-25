@@ -16,3 +16,8 @@ new DateTime(2026, 10, 25).StartOfWeek(); // 19/10/2026
 ```
 
 Sous .NET 10, les méthodes SQL (`ToDataTableS`, `ToDataTableC`) utilisent `Microsoft.Data.SqlClient` ; sous .NET Framework 4.8, `System.Data.SqlClient`.
+
+## Skill Claude
+
+Le package contient `skills/jbopale-extensions/SKILL.md`, une fiche d'utilisation de la bibliothèque pour Claude Code.
+Pour l'activer dans un projet, copiez ce dossier dans `.claude/skills/` du projet (le fichier est aussi dans le dossier `skills/` de ce dépôt).
