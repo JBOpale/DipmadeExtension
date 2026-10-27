@@ -427,3 +427,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Règles locales Claude (non publiées)
+CLAUDE.md
