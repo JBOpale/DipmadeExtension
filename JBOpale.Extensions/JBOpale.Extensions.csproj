@@ -19,8 +19,8 @@
     <Description>Ensemble de méthodes d'extension C# pour simplifier votre code : chaînes, collections, dates, nombres, MIME, mots de passe, paramètres SQL (listes).</Description>
     <PackageTags>JBOpale Extensions SqlParametre</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/JBOpale/DipmadeExtension</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/JBOpale/DipmadeExtension</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/JBOpale/JBOpale.Extension</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JBOpale/JBOpale.Extension</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
@@ -35,6 +35,7 @@ Version 1.0.2 : Corrections de bugs
 Version 1.0.1 : Méthode de génération d'un mot de passe
 Version 1.0.0 : GetMime, ConvertReal, ToDataTable (List Int64 vers [dbo].[Int64List] pour un SqlParameter)
     </PackageReleaseNotes>
+    <PackageIcon></PackageIcon>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
