@@ -35,7 +35,8 @@ Version 1.0.2 : Corrections de bugs
 Version 1.0.1 : Méthode de génération d'un mot de passe
 Version 1.0.0 : GetMime, ConvertReal, ToDataTable (List Int64 vers [dbo].[Int64List] pour un SqlParameter)
     </PackageReleaseNotes>
-    <PackageIcon></PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net48'">
@@ -44,6 +45,7 @@ Version 1.0.0 : GetMime, ConvertReal, ToDataTable (List Int64 vers [dbo].[Int64L
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="\" />
     <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
     <None Include="..\README.md" Pack="true" PackagePath="\" />
     <None Include="..\skills\jbopale-extensions\SKILL.md" Pack="true" PackagePath="skills\jbopale-extensions\" />
