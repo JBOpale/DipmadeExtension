@@ -5,7 +5,7 @@ description: Utiliser la bibliothèque NuGet JBOpale.Extensions (espace de noms 
 
 # JBOpale.Extensions
 
-Bibliothèque de méthodes d'extension C#, sous licence MIT. Cibles : .NET Framework 4.8 et .NET 10.
+Bibliothèque de méthodes d'extension C#, sous licence MIT. Cibles : .NET Framework 4.8, .NET 8 et .NET 10.
 
 ```
 dotnet add package JBOpale.Extensions
@@ -50,7 +50,7 @@ Avant d'écrire une fonction utilitaire, vérifier qu'elle n'existe pas déjà c
 | `JoinToString(separateur = ", ")` | Concaténation |
 | `AddRange(elements)` | Sur toute `ICollection<T>` |
 | `valeur.In(a, b, c)` | Équivalent du `IN` SQL |
-| `GetValueOrDefault(cle, defaut)`, `AddOrUpdate(cle, valeur)` | Sur `IDictionary` (`GetValueOrDefault` est natif sous .NET 10) |
+| `GetValueOrDefault(cle, defaut)`, `AddOrUpdate(cle, valeur)` | Sur `IDictionary` (`GetValueOrDefault` est natif sous .NET 8 et .NET 10) |
 
 ## Dates
 
@@ -71,7 +71,7 @@ string mime = Extensions.GetMime(".pdf", out string description); // "applicatio
 string mdp  = Extensions.GeneratePassword(12, LettresSpecials: false, CaracteresSpeciaux: true);
 ```
 
-`GeneratePassword` n'est pas cryptographiquement sûr : ne pas l'utiliser pour des secrets sensibles.
+`GeneratePassword` utilise un générateur cryptographique (`RandomNumberGenerator`) ; à partir de 10 caractères, le mot de passe contient au moins une minuscule, une majuscule, un chiffre et, si demandé, un caractère spécial.
 
 ## Envoyer une liste à SQL Server (paramètre table)
 
@@ -92,7 +92,7 @@ cmd.CommandType = CommandType.StoredProcedure;
 cmd.Parameters.Add(p);
 ```
 
-`SqlParameter` vient de `System.Data.SqlClient` sous .NET Framework 4.8 et de `Microsoft.Data.SqlClient` sous .NET 10. Pour `ToDataTableC` avec une classe, seuls les **champs publics** sont lus (pas les propriétés), dans l'ordre de déclaration, qui doit correspondre au type table SQL.
+`SqlParameter` vient de `System.Data.SqlClient` sous .NET Framework 4.8 et de `Microsoft.Data.SqlClient` sous .NET 8 et .NET 10. Pour `ToDataTableC` avec une classe, seuls les **champs publics** sont lus (pas les propriétés), dans l'ordre de déclaration, qui doit correspondre au type table SQL.
 
 ## Pièges
 

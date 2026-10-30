@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net48;net10.0</TargetFrameworks>
+    <TargetFrameworks>net48;net8.0;net10.0</TargetFrameworks>
     <RootNamespace>JBOpale</RootNamespace>
     <AssemblyName>JBOpale.Extensions</AssemblyName>
     <Deterministic>true</Deterministic>
@@ -24,6 +24,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>
+Version 2.1.0 :
+Nouvelle cible net8.0 (en plus de net48 et net10.0).
+GeneratePassword utilise un générateur cryptographique (RandomNumberGenerator) au lieu de System.Random.
+
 Version 2.0.0 :
 Skill Claude (skills/jbopale-extensions/SKILL.md) inclus dans le package pour expliquer l'utilisation de la bibliothèque.
 Renommage : package JBOpale.Extensions, assembly JBOpale.Extensions, espace de noms JBOpale (anciennement DIPMADE).

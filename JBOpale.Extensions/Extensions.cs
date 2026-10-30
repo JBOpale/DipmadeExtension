@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 #endif
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Cryptography;
 
 namespace JBOpale
 {
@@ -325,6 +326,34 @@ namespace JBOpale
 
 
         /// <summary>
+        /// Tire un entier aléatoire dans [0, max[ avec un générateur cryptographique, sans biais de modulo
+        /// </summary>
+        /// <param name="max">Borne supérieure exclue (strictement positive)</param>
+        private static int TirageSecurise(int max)
+        {
+#if NETFRAMEWORK
+            if (max <= 0) throw new ArgumentOutOfRangeException(nameof(max));
+            uint plage = (uint)max;
+            // Plus grand multiple de plage représentable : les tirages au-delà sont rejetés pour éviter le biais
+            uint limite = uint.MaxValue - (uint.MaxValue % plage);
+            byte[] octets = new byte[4];
+            uint valeur;
+            do
+            {
+                GenerateurSecurise.GetBytes(octets);
+                valeur = BitConverter.ToUInt32(octets, 0);
+            } while (valeur >= limite);
+            return (int)(valeur % plage);
+#else
+            return RandomNumberGenerator.GetInt32(max);
+#endif
+        }
+
+#if NETFRAMEWORK
+        private static readonly RandomNumberGenerator GenerateurSecurise = RandomNumberGenerator.Create();
+#endif
+
+        /// <summary>
         /// Génére un mot de passe aléatoire
         /// </summary>
         /// <param name="NBCaractere">Nombre de caractére souhaité</param>
@@ -346,14 +375,6 @@ namespace JBOpale
             string sCaracteresSpeciaux = "&\\/\"?,-_#{'([|@])}=+$£%*!:,";
             if (ListeCaracteresSpeciaux != null) sCaracteresSpeciaux = ListeCaracteresSpeciaux;
 
-            Random aleatoire = new Random();
-
-            int boucle = aleatoire.Next(10);
-            for (int i = 0; i < boucle; i++)
-            {
-                aleatoire.Next(26);
-            }
-
             int info = 5;
 
             string MotPasse = "";
@@ -361,7 +382,7 @@ namespace JBOpale
             bool[] bInfo = { false, false, false, false, false };
             for (int i = 0; i < NBCaractere; i++)
             {
-               int type = aleatoire.Next(info);
+               int type = TirageSecurise(info);
 
                 if(i >= milieu)
                 {
@@ -382,24 +403,24 @@ namespace JBOpale
                 {
                     case 0:
                         bInfo[0] = true;
-                        val = aleatoire.Next(26);
+                        val = TirageSecurise(26);
                         MotPasse += sMinuscule[val];
                         break;
                     case 1:
                         bInfo[1] = true;
-                        val = aleatoire.Next(26);
+                        val = TirageSecurise(26);
                         MotPasse += sMajuscule[val];
                         break;
                     case 2:
                         bInfo[2] = true;
-                        val = aleatoire.Next(10);
+                        val = TirageSecurise(10);
                         MotPasse += val + "";
                         break;
                     case 3:
                         if (LettresSpecials)
                         {
                             bInfo[3] = true;
-                            val = aleatoire.Next(sLettresSpeciales.Length);
+                            val = TirageSecurise(sLettresSpeciales.Length);
                             MotPasse += sLettresSpeciales[val];
                         }
                         else
@@ -409,14 +430,14 @@ namespace JBOpale
                         if (CaracteresSpeciaux)
                         {
                             bInfo[4] = true;
-                            val = aleatoire.Next(sCaracteresSpeciaux.Length);
+                            val = TirageSecurise(sCaracteresSpeciaux.Length);
                             MotPasse += sCaracteresSpeciaux[val];
                         }
                         else
                             i--;
                         break;
                     default:
-                        val = aleatoire.Next(26);
+                        val = TirageSecurise(26);
                         MotPasse += sMinuscule[val];
                         break;
                 }

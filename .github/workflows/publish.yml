@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  # La publication est bloquée tant que tous les tests ne passent pas, sur net48 et net10.0.
+  # La publication est bloquée tant que tous les tests ne passent pas, sur net48, net8.0 et net10.0.
   test:
     runs-on: [self-hosted, Windows, SURFACE-BOOK-3]
 
@@ -14,12 +14,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Installer le SDK .NET 10
+      - name: Installer les SDK .NET 8 et 10
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: |
+            8.0.x
+            10.0.x
 
-      - name: Tests (net48 et net10.0)
+      - name: Tests (net48, net8.0 et net10.0)
         run: dotnet test JBOpale.Extensions.sln --configuration Release
 
   publish:
@@ -34,10 +36,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Installer le SDK .NET 10
+      - name: Installer les SDK .NET 8 et 10
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: |
+            8.0.x
+            10.0.x
 
       - name: Pack NuGet
         shell: pwsh
@@ -53,7 +57,7 @@ jobs:
           $zip = [System.IO.Compression.ZipFile]::OpenRead($pkg.FullName)
           $names = $zip.Entries | ForEach-Object { $_.FullName }
           $zip.Dispose()
-          foreach ($attendu in 'lib/net48/JBOpale.Extensions.dll', 'lib/net10.0/JBOpale.Extensions.dll', 'skills/jbopale-extensions/SKILL.md', 'README.md', 'LICENSE.md', 'icon.png') {
+          foreach ($attendu in 'lib/net48/JBOpale.Extensions.dll', 'lib/net8.0/JBOpale.Extensions.dll', 'lib/net10.0/JBOpale.Extensions.dll', 'skills/jbopale-extensions/SKILL.md', 'README.md', 'LICENSE.md', 'icon.png') {
             if ($names -notcontains $attendu) { throw "Fichier manquant dans le package : $attendu" }
           }
 
