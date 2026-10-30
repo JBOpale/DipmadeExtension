@@ -80,5 +80,25 @@ namespace UnitTest_Extensions
             Assert.AreEqual(DayOfWeek.Sunday, "blue".ToEnum(DayOfWeek.Sunday));
             Assert.AreEqual("a > b", new Exception("a", new Exception("b")).GetFullMessage());
         }
+
+        [TestMethod]
+        public void GeneratePassword_Securise()
+        {
+            var mdps = new HashSet<string>();
+            for (int i = 0; i < 200; i++)
+            {
+                string p = Extensions.GeneratePassword(12);
+                Assert.AreEqual(12, p.Length);
+                Assert.IsTrue(p.Any(char.IsLower));
+                Assert.IsTrue(p.Any(char.IsUpper));
+                Assert.IsTrue(p.Any(char.IsDigit));
+                Assert.IsTrue(p.Any(c => !char.IsLetterOrDigit(c)));
+                mdps.Add(p);
+            }
+            Assert.AreEqual(200, mdps.Count);
+
+            string sansSpeciaux = Extensions.GeneratePassword(16, CaracteresSpeciaux: false);
+            Assert.IsTrue(sansSpeciaux.All(char.IsLetterOrDigit));
+        }
     }
 }
