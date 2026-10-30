@@ -71,7 +71,7 @@ string mime = Extensions.GetMime(".pdf", out string description); // "applicatio
 string mdp  = Extensions.GeneratePassword(12, LettresSpecials: false, CaracteresSpeciaux: true);
 ```
 
-`GeneratePassword` n'est pas cryptographiquement sûr : ne pas l'utiliser pour des secrets sensibles.
+`GeneratePassword` utilise un générateur cryptographique (`RandomNumberGenerator`) : le mot de passe contient au moins une minuscule, une majuscule, un chiffre et, si demandé, un caractère spécial.
 
 ## Envoyer une liste à SQL Server (paramètre table)
 
